@@ -22,23 +22,23 @@ sql.query(
     });
 }
 Plan.update=(plan, result)=>{
-    `call ingreso_plan(${plan.idplan},${plan.monto},${plan.interes},${plan.plan_dia},"${plan.estado}","update");`,
+   sql.query( `call ingreso_plan(${plan.idplan},${plan.monto},${plan.interes},${plan.plan_dia},"${plan.estado}","update");`,
     (error, res)=>{
         if(error){
             console.log(error);
-            result(error, null)
+            result({message:"Failed", error:error}, null)
             return;
         }else{
             result(null,{message:"Success",res:res})
         }
-    }
+    });
 }
 Plan.getView=(result)=>{
     sql.query(
         `call ingreso_plan(${null},${null},${null},${null},"Activo","view");`,
         (error, res)=>{
             if(error){
-                result(error, null);
+                result(error,null );
                 return
             }
             if(res[0].length){
@@ -52,12 +52,14 @@ Plan.getView=(result)=>{
 }
 
 Plan.delete=(id, result)=>{
-    sql.query(`call ingreso_plan(${id},${null},${null},${null},${null},"${null}","delete");`,
+    sql.query(`call ingreso_plan(${id},${null},${null},${null},"${null}","delete");`,
     (error,res)=>{
         if(error){
-            result(null,{message:"Failed", res:res});
+            console.log(error);
+            result({message:"Failed", res:error},null);
             return;
         }else{
+            
             result(null,{message:"Success", res:res})
         }
     

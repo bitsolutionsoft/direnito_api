@@ -8,7 +8,7 @@ module.exports=app=>{
     })
 
     app.post("/plan",plan.create);
-    app.post("/plan/update",plan.update);
+    app.post("/plan/update", plan.update);
     app.get("/plan/view",plan.getView);
     app.get("/plan/delete/:id", plan.delete)
 };
