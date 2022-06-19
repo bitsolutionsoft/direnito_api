@@ -6,7 +6,7 @@ if(!req.body){
 }
 Plan.create(new Plan(req.body),(error,data)=>{
     if(error)
-    res.status(500).send({message:'Failed',error:error.message});
+    res.status(500).send({message:'Failed',res:error.message});
     else  
     res.send(data);
 });
@@ -16,9 +16,9 @@ exports.getView=(req,res)=>{
     Plan.getView((error,data)=>{
         if(error){
             if(error.kind === "not_found"){
-                res.status(404).send({message:"Failed",error:error.message});
+                res.status(404).send({message:"Failed",res:error.message});
             }else{
-                res.status(500).send({message:"Failed",error:error.message});
+                res.status(500).send({message:"Failed",res:error.message});
             }
         }else{
             res.send(data);
@@ -34,9 +34,9 @@ exports.update=(req,res)=>{
         if(error){
             console.log(error);
             if(error.kind==="not_found"){
-                res.status(404).send({message:"Failed",error:error.message});
+                res.status(404).send({message:"Failed",res:error.message});
             }else{
-                res.status(500).send({message:"Failed",error:error.message})
+                res.status(500).send({message:"Failed",res:error.message})
             }
         }else{
             res.send(data);
@@ -48,9 +48,9 @@ exports.delete=(req, res)=>{
  Plan.delete(req.params.id,(error,data)=>{
     if(error){
         if(error.kind === "not_found"){
-            res.status(404).send({message:"Failed", detail:error.res.message});
+            res.status(404).send({message:"Failed", res:error.res.message});
         }else{
-            res.status(500).send({message:"Failed", detail:error.res.message});
+            res.status(500).send({message:"Failed", res:error.res.message});
         }
     }else{
         res.send(data)
