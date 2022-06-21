@@ -1,16 +1,16 @@
 const sql = require("../config/db");
 
-const Plan = function (plan) {
-  this.idplan = plan.idplan;
-  this.monto = plan.monto;
-  this.interes = plan.interes;
-  this.plan_dia = plan.plan_dia;
-  this.estado = plan.estado;
+const Permiso = function (permiso) {
+  this.idpermiso = permiso.idpermiso;
+  this.idtipo = permiso.idtipo;
+  this.idmodulo = permiso.idmodulo;
+  this.permiso = permiso.permiso;
+  
 };
 
-Plan.create = (plan, result) => {
+Permiso.create = (permiso, result) => {
   sql.query(
-    `call ingreso_plan(${plan.idplan},${plan.monto},${plan.interes},${plan.plan_dia},"${plan.estado}","new");`,
+    `call ingreso_permiso(${permiso.idpermiso},${permiso.idtipo},${permiso.idmodulo},${permiso.permiso},"new");`,
     (error, res) => {
       if (error) {
         result({ message: "Failed", res: error }, null);
@@ -21,9 +21,9 @@ Plan.create = (plan, result) => {
     }
   );
 };
-Plan.update = (plan, result) => {
+Permiso.update = (permiso, result) => {
   sql.query(
-    `call ingreso_plan(${plan.idplan},${plan.monto},${plan.interes},${plan.plan_dia},"${plan.estado}","update");`,
+    `call ingreso_permiso(${permiso.idpermiso},${permiso.idtipo},${permiso.idmodulo},${permiso.permiso},"update");`,
     (error, res) => {
       if (error) {
         console.log(error);
@@ -35,9 +35,9 @@ Plan.update = (plan, result) => {
     }
   );
 };
-Plan.view = (result) => {
+Permiso.view = (result) => {
   sql.query(
-    `call ingreso_plan(${null},${null},${null},${null},"Activo","view");`,
+    `call ingreso_permiso(${null},${null},${null},${null},"view");`,
     (error, res) => {
       if (error) {
         result({message:"Failed",res:error}, null);
@@ -52,9 +52,9 @@ Plan.view = (result) => {
   );
 };
 
-Plan.delete = (id, result) => {
+Permiso.delete = (id, result) => {
   sql.query(
-    `call ingreso_plan(${id},${null},${null},${null},"${null}","delete");`,
+    `call ingreso_permiso(${id},${null},${null},${null},"delete");`,
     (error, res) => {
       if (error) {
         console.log(error);
@@ -66,4 +66,4 @@ Plan.delete = (id, result) => {
     }
   );
 };
-module.exports = Plan;
+module.exports = Permiso;

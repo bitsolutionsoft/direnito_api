@@ -1,10 +1,10 @@
-const Plan=require("../model/model_plan");
+const Abono=require("../model/model_abono");
 
 exports.create=(req,res)=>{
 if(!req.body){
     res.status(400).send({message:"Failed",res:"El contenido no puede ser vacío"});
 }
-Plan.create(new Plan(req.body),(error,data)=>{
+Abono.create(new Abono(req.body),(error,data)=>{
     if(error){ 
 		res.status(500).send({message:'Failed',res:error.res.message});
 	}
@@ -18,7 +18,7 @@ exports.update=(req,res)=>{
     if(!req.body){
         res.status(400).send({message:"Failed",res:"El contenido no puede ser vacío"});
     }
-    Plan.update(new Plan(req.body),(error, data)=>{
+    Abono.update(new Abono(req.body),(error, data)=>{
         if(error){
             console.log(error);
             if(error.kind==="not_found"){
@@ -33,7 +33,7 @@ exports.update=(req,res)=>{
 }
 
 exports.view=(res)=>{
-    Plan.view((error,data)=>{
+    Abono.view((error,data)=>{
         if(error){
             if(error.kind === "not_found"){
                 res.status(404).send({message:"Failed",res:error.message});
@@ -48,7 +48,7 @@ exports.view=(res)=>{
 
 
 exports.delete=(req, res)=>{
- Plan.delete(req.params.id,(error,data)=>{
+ Abono.delete(req.params.id,(error,data)=>{
     if(error){
         if(error.kind === "not_found"){
             res.status(404).send({message:"Failed", res:error.res.message});

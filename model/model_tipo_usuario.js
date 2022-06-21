@@ -1,16 +1,13 @@
 const sql = require("../config/db");
 
-const Plan = function (plan) {
-  this.idplan = plan.idplan;
-  this.monto = plan.monto;
-  this.interes = plan.interes;
-  this.plan_dia = plan.plan_dia;
-  this.estado = plan.estado;
+const TipoUsuario = function (tipoUsuario) {
+  this.idtipo = tipoUsuario.idtipo;
+  this.nombre = tipoUsuario.nombre;
 };
 
-Plan.create = (plan, result) => {
+TipoUsuario.create = (tipoUsuario, result) => {
   sql.query(
-    `call ingreso_plan(${plan.idplan},${plan.monto},${plan.interes},${plan.plan_dia},"${plan.estado}","new");`,
+    `call ingreso_tipo_usuario(${tipoUsuario.idtipo},"${tipoUsuario.nombre}","new");`,
     (error, res) => {
       if (error) {
         result({ message: "Failed", res: error }, null);
@@ -21,9 +18,9 @@ Plan.create = (plan, result) => {
     }
   );
 };
-Plan.update = (plan, result) => {
+TipoUsuario.update = (tipoUsuario, result) => {
   sql.query(
-    `call ingreso_plan(${plan.idplan},${plan.monto},${plan.interes},${plan.plan_dia},"${plan.estado}","update");`,
+    `call ingreso_tipo_usuario(${tipoUsuario.idtipo},"${tipoUsuario.nombre}","update");`,
     (error, res) => {
       if (error) {
         console.log(error);
@@ -35,9 +32,9 @@ Plan.update = (plan, result) => {
     }
   );
 };
-Plan.view = (result) => {
+TipoUsuario.view = (result) => {
   sql.query(
-    `call ingreso_plan(${null},${null},${null},${null},"Activo","view");`,
+    `call ingreso_tipo_usuario(${null},"${null}","view");`,
     (error, res) => {
       if (error) {
         result({message:"Failed",res:error}, null);
@@ -52,9 +49,9 @@ Plan.view = (result) => {
   );
 };
 
-Plan.delete = (id, result) => {
+TipoUsuario.delete = (id, result) => {
   sql.query(
-    `call ingreso_plan(${id},${null},${null},${null},"${null}","delete");`,
+    `call ingreso_tipo_usuario(${id},"${null}","delete");`,
     (error, res) => {
       if (error) {
         console.log(error);
@@ -66,4 +63,4 @@ Plan.delete = (id, result) => {
     }
   );
 };
-module.exports = Plan;
+module.exports = TipoUsuario;

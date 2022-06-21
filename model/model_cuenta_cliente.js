@@ -1,16 +1,16 @@
 const sql = require("../config/db");
 
-const Plan = function (plan) {
-  this.idplan = plan.idplan;
-  this.monto = plan.monto;
-  this.interes = plan.interes;
-  this.plan_dia = plan.plan_dia;
-  this.estado = plan.estado;
+const CuentaCliente = function (cuentaCliente) {
+  this.idcuenta = cuentaCliente.idcuenta;
+  this.idcliente = cuentaCliente.idcliente;
+  this.idplan = cuentaCliente.idplan;
+  this.estado = cuentaCliente.estado;
+  this.prox_pago = cuentaCliente.prox_pago;
 };
 
-Plan.create = (plan, result) => {
+CuentaCliente.create = (cuentaCliente, result) => {
   sql.query(
-    `call ingreso_plan(${plan.idplan},${plan.monto},${plan.interes},${plan.plan_dia},"${plan.estado}","new");`,
+    `call ingreso_cuenta_cliente(${cuentaCliente.idcuenta},${cuentaCliente.idcliente},${cuentaCliente.idplan},"${cuentaCliente.estado}","${cuentaCliente.prox_pago}","new");`,
     (error, res) => {
       if (error) {
         result({ message: "Failed", res: error }, null);
@@ -21,9 +21,9 @@ Plan.create = (plan, result) => {
     }
   );
 };
-Plan.update = (plan, result) => {
+CuentaCliente.update = (cuentaCliente, result) => {
   sql.query(
-    `call ingreso_plan(${plan.idplan},${plan.monto},${plan.interes},${plan.plan_dia},"${plan.estado}","update");`,
+    `call ingreso_cuenta_cliente(${cuentaCliente.idcuenta},${cuentaCliente.idcliente},${cuentaCliente.idplan},"${cuentaCliente.estado}","${cuentaCliente.prox_pago}","update");`,
     (error, res) => {
       if (error) {
         console.log(error);
@@ -35,9 +35,9 @@ Plan.update = (plan, result) => {
     }
   );
 };
-Plan.view = (result) => {
+CuentaCliente.view = (result) => {
   sql.query(
-    `call ingreso_plan(${null},${null},${null},${null},"Activo","view");`,
+    `call ingreso_cuenta_cliente(${null},${null},${null},"Activo","2022-09-09","view");`,
     (error, res) => {
       if (error) {
         result({message:"Failed",res:error}, null);
@@ -52,9 +52,9 @@ Plan.view = (result) => {
   );
 };
 
-Plan.delete = (id, result) => {
+CuentaCliente.delete = (id, result) => {
   sql.query(
-    `call ingreso_plan(${id},${null},${null},${null},"${null}","delete");`,
+    `call ingreso_cuenta_cliente(${id},${null},${null},"Activo","2022-09-09","delete");`,
     (error, res) => {
       if (error) {
         console.log(error);
@@ -66,4 +66,4 @@ Plan.delete = (id, result) => {
     }
   );
 };
-module.exports = Plan;
+module.exports = CuentaCliente;

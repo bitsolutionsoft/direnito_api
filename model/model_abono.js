@@ -1,16 +1,19 @@
 const sql = require("../config/db");
 
-const Plan = function (plan) {
-  this.idplan = plan.idplan;
-  this.monto = plan.monto;
-  this.interes = plan.interes;
-  this.plan_dia = plan.plan_dia;
-  this.estado = plan.estado;
+const Abono = function (abono) {
+  this.idabono = abono.idabono;
+  this.idcuenta= abono.idcuenta;
+  this.idempleado = abono.idempleado;
+  this.concepto = abono.concepto;
+  this.monto = abono.monto;
+  this.tipo_pago=abono.tipo_pago;
+  this.comprobante=abono.comprobante;
+  this.mora=abono.mora;
 };
 
-Plan.create = (plan, result) => {
+Abono.create = (abono, result) => {
   sql.query(
-    `call ingreso_plan(${plan.idplan},${plan.monto},${plan.interes},${plan.plan_dia},"${plan.estado}","new");`,
+    `call ingreso_abono(${abono.idAbono},${abono.idcuenta},${abono.idempleado},"${abono.concepto}",${abono.monto},${abono.tipo_pago},"${abono.comprobante}",${abono.mora},"new");`,
     (error, res) => {
       if (error) {
         result({ message: "Failed", res: error }, null);
@@ -21,9 +24,9 @@ Plan.create = (plan, result) => {
     }
   );
 };
-Plan.update = (plan, result) => {
+Abono.update = (abono, result) => {
   sql.query(
-    `call ingreso_plan(${plan.idplan},${plan.monto},${plan.interes},${plan.plan_dia},"${plan.estado}","update");`,
+    `call ingreso_abono(${abono.idAbono},${abono.idcuenta},${abono.idempleado},"${abono.concepto}",${abono.monto},${abono.tipo_pago},"${abono.comprobante}",${abono.mora},"update");`,
     (error, res) => {
       if (error) {
         console.log(error);
@@ -35,9 +38,9 @@ Plan.update = (plan, result) => {
     }
   );
 };
-Plan.view = (result) => {
+Abono.view = (result) => {
   sql.query(
-    `call ingreso_plan(${null},${null},${null},${null},"Activo","view");`,
+    `call ingreso_abono(${null},${null},${null},"${null}",${null},${null},"${null}",${null},"view");`,
     (error, res) => {
       if (error) {
         result({message:"Failed",res:error}, null);
@@ -52,9 +55,9 @@ Plan.view = (result) => {
   );
 };
 
-Plan.delete = (id, result) => {
+Abono.delete = (id, result) => {
   sql.query(
-    `call ingreso_plan(${id},${null},${null},${null},"${null}","delete");`,
+    `call ingreso_abono(${id},${null},${null},"${null}",${null},${null},"${null}",${null},"delete");`,
     (error, res) => {
       if (error) {
         console.log(error);
@@ -66,4 +69,4 @@ Plan.delete = (id, result) => {
     }
   );
 };
-module.exports = Plan;
+module.exports = Abono;
