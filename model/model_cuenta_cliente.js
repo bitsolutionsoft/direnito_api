@@ -52,6 +52,23 @@ CuentaCliente.view = (result) => {
   );
 };
 
+
+CuentaCliente.viewone=(id,result)=>{
+  sql.query(
+    `call ingreso_cuenta_cliente(${null},${id},${null},"Activo","2022-09-09","viewone");`,
+    (error,res)=>{
+      if(error){
+        result({message:"Failed",res:error})
+        return;
+      }
+      if(res[0].length){
+        result(null,{message:"Success",res:res[0]});
+      }else{
+        result({error:"not_found", res:error});
+      }
+    }
+  )
+}
 CuentaCliente.delete = (id, result) => {
   sql.query(
     `call ingreso_cuenta_cliente(${id},${null},${null},"Activo","2022-09-09","delete");`,

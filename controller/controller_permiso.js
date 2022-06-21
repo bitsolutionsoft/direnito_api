@@ -32,13 +32,14 @@ exports.update=(req,res)=>{
     })
 }
 
-exports.view=(res)=>{
+exports.view=(req,res)=>{
     Permiso.view((error,data)=>{
         if(error){
+            console.log(error);
             if(error.kind === "not_found"){
-                res.status(404).send({message:"Failed",res:error.message});
+                res.status(404).send({message:"Failed",res:error});
             }else{
-                res.status(500).send({message:"Failed",res:error.message});
+                res.status(500).send({message:"Failed",res:error});
             }
         }else{
             res.send(data);
@@ -46,7 +47,20 @@ exports.view=(res)=>{
     });
 }
 
-
+exports.viewone=(req,res)=>{
+    Permiso.viewone(req.params.id,(error,data)=>{
+        if(error){
+            console.log(error);
+            if(error.kind === "not_found"){
+                res.status(404).send({message:"Failed",res:error});
+            }else{
+                res.status(500).send({message:"Failed",res:error});
+            }
+        }else{
+            res.send(data);
+        }
+    });
+}
 exports.delete=(req, res)=>{
  Permiso.delete(req.params.id,(error,data)=>{
     if(error){

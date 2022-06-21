@@ -32,7 +32,7 @@ exports.update=(req,res)=>{
     })
 }
 
-exports.view=(res)=>{
+exports.view=(req, res)=>{
     Plan.view((error,data)=>{
         if(error){
             if(error.kind === "not_found"){

@@ -13,9 +13,10 @@ const Abono = function (abono) {
 
 Abono.create = (abono, result) => {
   sql.query(
-    `call ingreso_abono(${abono.idAbono},${abono.idcuenta},${abono.idempleado},"${abono.concepto}",${abono.monto},${abono.tipo_pago},"${abono.comprobante}",${abono.mora},"new");`,
+    `call ingreso_abono(${abono.idabono},${abono.idcuenta},${abono.idempleado},"${abono.concepto}",${abono.monto},${abono.tipo_pago},"${abono.comprobante}",${abono.mora},"new");`,
     (error, res) => {
       if (error) {
+        console.log(error);
         result({ message: "Failed", res: error }, null);
         return;
       } else {
@@ -26,7 +27,7 @@ Abono.create = (abono, result) => {
 };
 Abono.update = (abono, result) => {
   sql.query(
-    `call ingreso_abono(${abono.idAbono},${abono.idcuenta},${abono.idempleado},"${abono.concepto}",${abono.monto},${abono.tipo_pago},"${abono.comprobante}",${abono.mora},"update");`,
+    `call ingreso_abono(${abono.idabono},${abono.idcuenta},${abono.idempleado},"${abono.concepto}",${abono.monto},${abono.tipo_pago},"${abono.comprobante}",${abono.mora},"update");`,
     (error, res) => {
       if (error) {
         console.log(error);

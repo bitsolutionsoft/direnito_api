@@ -52,6 +52,22 @@ Permiso.view = (result) => {
   );
 };
 
+Permiso.viewone=(id,result)=>{
+  sql.query(
+    `call ingreso_permiso(${null},${id},${null},${null},"view");`,
+    (error,res)=>{
+      if(error){
+        result({message:"Failed",res:error})
+        return;
+      }
+      if(res[0].length){
+        result(null,{message:"Success",res:res[0]});
+      }else{
+        result({error:"not_found", res:error});
+      }
+    }
+  )
+}
 Permiso.delete = (id, result) => {
   sql.query(
     `call ingreso_permiso(${id},${null},${null},${null},"delete");`,

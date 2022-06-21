@@ -1,5 +1,6 @@
 const Cliente = require("../model/model_cliente");
 
+
 exports.create=(req,res)=>{
     if(!req.body){
         res.status(400).send({message:"Failed", res:"El contenido no puede ser vacío."});
@@ -29,9 +30,10 @@ exports.update=(req,res)=>{
     })
 }
 
-exports.view=(res)=>{
+exports.view=(req,res)=>{
     Cliente.view((error,data)=>{
        if(error) {
+        console.log(error);
        if(error.kind==="not_found"){
         res.status(404).send({message:"Failed", res:error.message});
        }else{
@@ -42,6 +44,7 @@ exports.view=(res)=>{
        }
     })
 }
+
 exports.delete=(req,res)=>{
     Cliente.delete(req.params.id,(error,data)=>{
         if(error){

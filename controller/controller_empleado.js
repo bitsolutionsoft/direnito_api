@@ -27,9 +27,10 @@ exports.update=(req,res)=>{
         }
     })
 }
-exports.view=(res)=>{
+exports.view=(req,res)=>{
     Empleado.view((error,data)=>{
         if(error){
+            console.log(error);
             if(error.kind==="not_found"){
                 res.status(404).send({message:"Failed",res:error.message});
             }else{

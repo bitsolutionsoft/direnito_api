@@ -1,4 +1,5 @@
-const sql=require("../config/db_config");
+const sql=require("../config/db");
+
 const Empleado=function(empleado){
     this.idempleado=empleado.idempleado;
     this.nombre=empleado.nombre;
@@ -11,9 +12,11 @@ const Empleado=function(empleado){
 }
 
 Empleado.create=(empleado,result)=>{
-    sql.query(`call ingreso_empleado(${empleado.idempleado}."${empleado.nombre}","${empleado.apellido}","${empleado.telefono}","${empleado.direccion}","${empleado.dpi}",${empleado.tipo_usuario},"${empleado.estado}","new");`,
+    sql.query(
+    `call ingreso_empleado(${empleado.idempleado},"${empleado.nombre}","${empleado.apellido}","${empleado.telefono}","${empleado.direccion}","${empleado.dpi}",${empleado.tipo_usuario},"${empleado.estado}","new");`,
     (error,res)=>{
         if(error){
+            console.log(error);
             result({message:"Failed", res:error},null);
             return;
         }else{
@@ -23,7 +26,7 @@ Empleado.create=(empleado,result)=>{
 }
 
 Empleado.update=(empleado,result)=>{
-    sql.query(`call ingreso_empleado(${empleado.idempleado}."${empleado.nombre}","${empleado.apellido}","${empleado.telefono}","${empleado.direccion}","${empleado.dpi}",${empleado.tipo_usuario},"${empleado.estado}","update");`,
+    sql.query(`call ingreso_empleado(${empleado.idempleado},"${empleado.nombre}","${empleado.apellido}","${empleado.telefono}","${empleado.direccion}","${empleado.dpi}",${empleado.tipo_usuario},"${empleado.estado}","update");`,
     (error,res)=>{
         if(error){
             result({message:"Failed",res:error}, null);
@@ -35,13 +38,14 @@ Empleado.update=(empleado,result)=>{
 }
 
 Empleado.view=(result)=>{
-    sql.query(`call ingreso_empleado(${null}."${null}","${null}","${null}","${null}","${null}",${null},"${null}","view");`,
+    sql.query(`call ingreso_empleado(${null},"${null}","${null}","${null}","${null}","${null}",${null},"${null}","view");`,
     (error,res)=>{
         if(error){
+            console.log(error);
             result({message:"Failed", res:error}, null);
             return;
         }
-        if(res[0].lenth){
+        if(res[0].length){
             result(null,{message:"Success", res:res[0]});
         }else{
             result({error:"not_Found", res:error}, null);
@@ -49,7 +53,7 @@ Empleado.view=(result)=>{
     })
 }
 Empleado.delete=(id, result)=>{
-    sql.query(`call ingreso_empleado(${id}."${null}","${null}","${null}","${null}","${null}",${null},"${null}","delete");`,
+    sql.query(`call ingreso_empleado(${id},"${null}","${null}","${null}","${null}","${null}",${null},"${null}","delete");`,
     (error,res)=>{
         if(error){
             result({message:"Failed",res:error},null);
