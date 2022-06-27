@@ -59,7 +59,8 @@ exports.delete=(req, res)=>{
     }else{
         res.send(data)
     }
- })
+ });
+}
 exports.findUser=(req,res)=>{
     Usuario.findUser(new Usuario(req.body),(error,data)=>{
         if(error){
@@ -80,5 +81,4 @@ exports.findUser=(req,res)=>{
             })
         }
     })
-}
 }
