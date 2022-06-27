@@ -65,4 +65,20 @@ Usuario.delete = (id, result) => {
     }
   );
 };
+Usuario.findUser=(usuario,result)=>{
+  sql.query(
+    `call ingreso_usuario(${usuario.idusuario},${usuario.idempleado},"${usuario.usuario}","${usuario.pass}","login");`,
+    (error,res)=>{
+      if (error) {
+        result({message:"Failed",res:error}, null);
+        return;
+      }
+      if (res[0].length) {
+        result(null, { message: "Success", res: res[0] });
+      } else {
+        result({ error: "not_found",res:error }, null);
+      }
+    }
+  );
+}
 module.exports = Usuario;

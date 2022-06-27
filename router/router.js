@@ -17,57 +17,58 @@ module.exports=app=>{
     })
 
     //router Plan
-    app.post("/plan",plan.create);
-    app.post("/plan/update", plan.update);
-    app.get("/plan/view",plan.view);
-    app.get("/plan/delete/:id", plan.delete)
+    app.post("/plan",verifyToken,plan.create);
+    app.post("/plan/update",verifyToken, plan.update);
+    app.get("/plan/view",verifyToken,plan.view);
+    app.get("/plan/delete/:id",verifyToken, plan.delete)
     //router Cliente
-    app.post("/cliente",cliente.create);
-    app.post("/cliente/update",cliente.update);
-    app.get("/cliente/view",cliente.view);
-    app.get("/cliente/delete/:id",cliente.delete);
+    app.post("/cliente",verifyToken,cliente.create);
+    app.post("/cliente/update",verifyToken,cliente.update);
+    app.get("/cliente/view",verifyToken,cliente.view);
+    app.get("/cliente/delete/:id",verifyToken,cliente.delete);
     //router empleado
-    app.post("/empleado",empleado.create);
-    app.post("/empleado/update",empleado.update);
-    app.get("/empleado/view",empleado.view);
-    app.get("/empleado/delete/:id",empleado.delete);
+    app.post("/empleado",verifyToken,empleado.create);
+    app.post("/empleado/update",verifyToken,empleado.update);
+    app.get("/empleado/view",verifyToken,empleado.view);
+    app.get("/empleado/delete/:id",verifyToken,empleado.delete);
     //rourter abono
-    app.post("/abono",abono.create);
-    app.post("/abono/update",abono.update);
-    app.get("/abono/view",abono.view);
-    app.get("/abono/delete/:id",abono.delete);
+    app.post("/abono",verifyToken,abono.create);
+    app.post("/abono/update",verifyToken,abono.update);
+    app.get("/abono/view",verifyToken,abono.view);
+    app.get("/abono/delete/:id",verifyToken,abono.delete);
     //router cuenta_cliente
-    app.post("/cuentaCliente",cuentaCliente.create);
-    app.post("/cuentaCliente/update",cuentaCliente.update);
-    app.get("/cuentaCliente/view",cuentaCliente.view);
-    app.get("/cuentaCliente/viewone/:id",cuentaCliente.viewone);
-    app.get("/cuentaCliente/delete/:id",cuentaCliente.delete);
+    app.post("/cuentaCliente",verifyToken,cuentaCliente.create);
+    app.post("/cuentaCliente/update",verifyToken,cuentaCliente.update);
+    app.get("/cuentaCliente/view",verifyToken,cuentaCliente.view);
+    app.get("/cuentaCliente/viewone/:id",verifyToken,cuentaCliente.viewone);
+    app.get("/cuentaCliente/delete/:id",verifyToken,cuentaCliente.delete);
       //router tipo_pago
-    app.post("/tipoPago",tipoPago.create);
-    app.post("/tipoPago/update",tipoPago.update);
-    app.get("/tipoPago/view",tipoPago.view);
-    app.get("/tipoPago/delete/:id",tipoPago.delete);
+    app.post("/tipoPago",verifyToken,tipoPago.create);
+    app.post("/tipoPago/update",verifyToken,tipoPago.update);
+    app.get("/tipoPago/view",verifyToken,tipoPago.view);
+    app.get("/tipoPago/delete/:id",verifyToken,tipoPago.delete);
         //router usuario
-    app.post("/usuario",usuario.create);
-    app.post("/usuario/update",usuario.update);
-    app.get("/usuario/view",usuario.view);
-    app.get("/usuario/delete/:id",usuario.delete);
+    app.post("/usuario",verifyToken,usuario.create);
+    app.post("/usuario/update",verifyToken,usuario.update);
+    app.post("/usuario/login",verifyToken,usuario.findUser);
+    app.get("/usuario/view",verifyToken,usuario.view);
+    app.get("/usuario/delete/:id",verifyToken,usuario.delete);
     //router permiso
-    app.post("/permiso",permiso.create);
-    app.post("/permiso/update",permiso.update);
-    app.get("/permiso/view",permiso.view);
-    app.get("/permiso/viewtipo/:id",permiso.viewone);
-    app.get("/permiso/delete/:id",permiso.delete);
+    app.post("/permiso",verifyToken,permiso.create);
+    app.post("/permiso/update",verifyToken,permiso.update);
+    app.get("/permiso/view",verifyToken,permiso.view);
+    app.get("/permiso/emp/:id",verifyToken,permiso.viewone);
+    app.get("/permiso/delete/:id",verifyToken,permiso.delete);
     //router controller tipo usuario
-    app.post("/tipoUsuario",tipoUsuario.create);
-    app.post("/tipoUsuario/update",tipoUsuario.update);
-    app.get("/tipoUsuario/view",tipoUsuario.view);
-    app.get("/tipoUsuario/delete/:id",tipoUsuario.delete);
+    app.post("/tipoUsuario",verifyToken,tipoUsuario.create);
+    app.post("/tipoUsuario/update",verifyToken,tipoUsuario.update);
+    app.get("/tipoUsuario/view",verifyToken,tipoUsuario.view);
+    app.get("/tipoUsuario/delete/:id",verifyToken,tipoUsuario.delete);
     //router controller modulo
-    app.post("/modulo",modulo.create);
-    app.post("/modulo/update",modulo.update);
-    app.get("/modulo/view",modulo.view);
-    app.get("/modulo/delete/:id",modulo.delete);
+    app.post("/modulo",verifyToken,modulo.create);
+    app.post("/modulo/update",verifyToken,modulo.update);
+    app.get("/modulo/view",verifyToken,modulo.view);
+    app.get("/modulo/delete/:id",verifyToken,modulo.delete);
     
 
 };

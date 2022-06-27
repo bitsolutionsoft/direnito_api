@@ -1,3 +1,4 @@
+const jwt=require("jsonwebtoken");
 const Usuario=require("../model/model_usuario");
 
 exports.create=(req,res)=>{
@@ -58,5 +59,26 @@ exports.delete=(req, res)=>{
     }else{
         res.send(data)
     }
- })    
+ })
+exports.findUser=(req,res)=>{
+    Usuario.findUser(new Usuario(req.body),(error,data)=>{
+        if(error){
+            if(error.kind === "not_found"){
+                res.status(404).send({message:"Failed", res:error.res.message});
+            }else{
+                res.status(500).send({message:"Failed", res:error.res.message});
+            }
+        }else{
+            const user={
+                id:0,
+                nombre:'Dinerito_Ahora',
+                cdd:"5689"
+            }
+            jwt.sign({user},'secretKey',(error,token)=>{
+                data.res[0].token=token
+                res.send(data) 
+            })
+        }
+    })
+}
 }
