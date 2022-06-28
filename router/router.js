@@ -50,7 +50,7 @@ module.exports=app=>{
         //router usuario
     app.post("/usuario",verifyToken,usuario.create);
     app.post("/usuario/update",verifyToken,usuario.update);
-    app.post("/usuario/login",verifyToken,usuario.findUser);
+    app.post("/usuario/login",usuario.findUser);
     app.get("/usuario/view",verifyToken,usuario.view);
     app.get("/usuario/delete/:id",verifyToken,usuario.delete);
     //router permiso

@@ -52,9 +52,9 @@ exports.delete=(req, res)=>{
  Usuario.delete(req.params.id,(error,data)=>{
     if(error){
         if(error.kind === "not_found"){
-            res.status(404).send({message:"Failed", res:error.res.message});
+            res.status(404).send({message:"Failed", res:error.res});
         }else{
-            res.status(500).send({message:"Failed", res:error.res.message});
+            res.status(500).send({message:"Failed", res:error.res});
         }
     }else{
         res.send(data)
@@ -64,10 +64,11 @@ exports.delete=(req, res)=>{
 exports.findUser=(req,res)=>{
     Usuario.findUser(new Usuario(req.body),(error,data)=>{
         if(error){
+            console.log(error);
             if(error.kind === "not_found"){
-                res.status(404).send({message:"Failed", res:error.res.message});
+                res.status(404).send({message:"Failed", res:error.res});
             }else{
-                res.status(500).send({message:"Failed", res:error.res.message});
+                res.status(500).send({message:"Failed", res:error.res});
             }
         }else{
             const user={

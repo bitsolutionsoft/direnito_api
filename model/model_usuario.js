@@ -70,13 +70,14 @@ Usuario.findUser=(usuario,result)=>{
     `call ingreso_usuario(${usuario.idusuario},${usuario.idempleado},"${usuario.usuario}","${usuario.pass}","login");`,
     (error,res)=>{
       if (error) {
+        console.log(error);
         result({message:"Failed",res:error}, null);
         return;
       }
       if (res[0].length) {
         result(null, { message: "Success", res: res[0] });
       } else {
-        result({ error: "not_found",res:error }, null);
+        result({ error:"not_found",res:error }, null);
       }
     }
   );
