@@ -8,7 +8,7 @@ module.exports=app=>{
     const tipoPago=require("../controller/controller_tipo_pago");
     const usuario=require("../controller/controller_usuario");
     const permiso =require("../controller/controller_permiso");
-    const tipoUsuario =require("../controller/controller_tipo_usuario");
+   // const tipoUsuario =require("../controller/controller_tipo_usuario");
     const modulo=require("../controller/controller_modulo");
 
 
@@ -58,17 +58,18 @@ module.exports=app=>{
     app.post("/permiso/update",verifyToken,permiso.update);
     app.get("/permiso/view",verifyToken,permiso.view);
     app.get("/permiso/emp/:id",verifyToken,permiso.viewone);
-    app.get("/permiso/delete/:id",verifyToken,permiso.delete);
-    //router controller tipo usuario
-    app.post("/tipoUsuario",verifyToken,tipoUsuario.create);
-    app.post("/tipoUsuario/update",verifyToken,tipoUsuario.update);
-    app.get("/tipoUsuario/view",verifyToken,tipoUsuario.view);
-    app.get("/tipoUsuario/delete/:id",verifyToken,tipoUsuario.delete);
-    //router controller modulo
+ //router controller modulo
     app.post("/modulo",verifyToken,modulo.create);
     app.post("/modulo/update",verifyToken,modulo.update);
     app.get("/modulo/view",verifyToken,modulo.view);
     app.get("/modulo/delete/:id",verifyToken,modulo.delete);
+    //router controller tipo usuario
+    /*
+    app.post("/tipoUsuario",verifyToken,tipoUsuario.create);
+    app.post("/tipoUsuario/update",verifyToken,tipoUsuario.update);
+    app.get("/tipoUsuario/view",verifyToken,tipoUsuario.view);
+    app.get("/tipoUsuario/delete/:id",verifyToken,tipoUsuario.delete);*/
+   
     
 
 };

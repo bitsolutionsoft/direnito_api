@@ -7,13 +7,12 @@ const Empleado=function(empleado){
     this.telefono=empleado.telefono;
     this.direccion=empleado.direccion;
     this.dpi=empleado.dpi;
-    this.tipo_usuario=empleado.tipo_usuario;
     this.estado=empleado.estado;
 }
 
 Empleado.create=(empleado,result)=>{
     sql.query(
-    `call ingreso_empleado(${empleado.idempleado},"${empleado.nombre}","${empleado.apellido}","${empleado.telefono}","${empleado.direccion}","${empleado.dpi}",${empleado.tipo_usuario},"${empleado.estado}","new");`,
+    `call ingreso_empleado(${empleado.idempleado},"${empleado.nombre}","${empleado.apellido}","${empleado.telefono}","${empleado.direccion}","${empleado.dpi}","${empleado.estado}","new");`,
     (error,res)=>{
         if(error){
             console.log(error);
@@ -26,7 +25,7 @@ Empleado.create=(empleado,result)=>{
 }
 
 Empleado.update=(empleado,result)=>{
-    sql.query(`call ingreso_empleado(${empleado.idempleado},"${empleado.nombre}","${empleado.apellido}","${empleado.telefono}","${empleado.direccion}","${empleado.dpi}",${empleado.tipo_usuario},"${empleado.estado}","update");`,
+    sql.query(`call ingreso_empleado(${empleado.idempleado},"${empleado.nombre}","${empleado.apellido}","${empleado.telefono}","${empleado.direccion}","${empleado.dpi}","${empleado.estado}","update");`,
     (error,res)=>{
         if(error){
             result({message:"Failed",res:error}, null);
@@ -38,7 +37,7 @@ Empleado.update=(empleado,result)=>{
 }
 
 Empleado.view=(result)=>{
-    sql.query(`call ingreso_empleado(${null},"${null}","${null}","${null}","${null}","${null}",${null},"${null}","view");`,
+    sql.query(`call ingreso_empleado(${null},"${null}","${null}","${null}","${null}","${null}","${null}","view");`,
     (error,res)=>{
         if(error){
             console.log(error);
@@ -53,7 +52,7 @@ Empleado.view=(result)=>{
     })
 }
 Empleado.delete=(id, result)=>{
-    sql.query(`call ingreso_empleado(${id},"${null}","${null}","${null}","${null}","${null}",${null},"${null}","delete");`,
+    sql.query(`call ingreso_empleado(${id},"${null}","${null}","${null}","${null}","${null}","${null}","delete");`,
     (error,res)=>{
         if(error){
             result({message:"Failed",res:error},null);

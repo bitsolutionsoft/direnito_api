@@ -2,7 +2,7 @@ const sql = require("../config/db");
 
 const Permiso = function (permiso) {
   this.idpermiso = permiso.idpermiso;
-  this.idtipo = permiso.idtipo;
+  this.idempleado = permiso.idempleado;
   this.idmodulo = permiso.idmodulo;
   this.permiso = permiso.permiso;
   
@@ -10,7 +10,7 @@ const Permiso = function (permiso) {
 
 Permiso.create = (permiso, result) => {
   sql.query(
-    `call ingreso_permiso(${permiso.idpermiso},${permiso.idtipo},${permiso.idmodulo},${permiso.permiso},"new");`,
+    `call ingreso_permiso(${permiso.idpermiso},${permiso.idempleado},${permiso.idmodulo},${permiso.permiso},"new");`,
     (error, res) => {
       if (error) {
         result({ message: "Failed", res: error }, null);
@@ -23,7 +23,7 @@ Permiso.create = (permiso, result) => {
 };
 Permiso.update = (permiso, result) => {
   sql.query(
-    `call ingreso_permiso(${permiso.idpermiso},${permiso.idtipo},${permiso.idmodulo},${permiso.permiso},"update");`,
+    `call ingreso_permiso(${permiso.idpermiso},${permiso.idempleado},${permiso.idmodulo},${permiso.permiso},"update");`,
     (error, res) => {
       if (error) {
         console.log(error);
