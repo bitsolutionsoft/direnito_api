@@ -25,6 +25,7 @@ Plan.update = (plan, result) => {
   sql.query(
     `call ingreso_plan(${plan.idplan},${plan.monto},${plan.interes},${plan.plan_dia},"${plan.estado}","update");`,
     (error, res) => {
+	
       if (error) {
         console.log(error);
         result({ message: "Failed", res: error }, null);
@@ -44,6 +45,7 @@ Plan.view = (result) => {
         return;
       }
       if (res[0].length) {
+		  console.log(res[0]);
         result(null, { message: "Success", res: res[0] });
       } else {
         result({ error: "not_found",res:error }, null);

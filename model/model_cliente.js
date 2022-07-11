@@ -14,7 +14,7 @@ const Cliente = function(cliente){
 }
 
 Cliente.create=(cliente, result)=>{
-    sql.query(`call ingreso_cliente(${cliente.idcliente},"${cliente.nombre}","${cliente.apellido}","${cliente.telefono}","${cliente.direccion}","${cliente.dpi}",${cliente.f_perfil},${cliente.f_casa},${cliente.f_dpi},"${cliente.ubicacion}","${cliente.estado}","new" );`,
+    sql.query(`call ingreso_cliente(${cliente.idcliente},"${cliente.nombre}","${cliente.apellido}","${cliente.telefono}","${cliente.direccion}","${cliente.dpi}","${cliente.f_perfil}","${cliente.f_casa}","${cliente.f_dpi}","${cliente.ubicacion}","${cliente.estado}","new" );`,
     (error,res)=>{
         if (error){
             console.log(error);
@@ -26,7 +26,7 @@ Cliente.create=(cliente, result)=>{
     })
 }
 Cliente.update=(cliente,result)=>{
-    sql.query(`call ingreso_cliente(${cliente.idcliente},"${cliente.nombre}","${cliente.apellido}","${cliente.telefono}","${cliente.direccion}",${cliente.dpi},${cliente.f_perfil},${cliente.f_casa},${cliente.f_dpi},"${cliente.ubicacion}","${cliente.estado}","update" );`,
+    sql.query(`call ingreso_cliente(${cliente.idcliente},"${cliente.nombre}","${cliente.apellido}","${cliente.telefono}","${cliente.direccion}","${cliente.dpi}","${cliente.f_perfil}","${cliente.f_casa}","${cliente.f_dpi}","${cliente.ubicacion}","${cliente.estado}","update" );`,
     (error,res)=>{
         if(error){
             result({message:"Failed",res:error}, null);
@@ -37,7 +37,7 @@ Cliente.update=(cliente,result)=>{
     })
 }
 Cliente.view=(result)=>{
-    sql.query(`call ingreso_cliente(${null},"${null}","${null}","${null}","${null}","${null}",${null},${null},${null},"${null}","${null}","view" );`,
+    sql.query(`call ingreso_cliente(${null},"${null}","${null}","${null}","${null}","${null}","${null}","${null}","${null}","${null}","${null}","view" );`,
     (error,res)=>{
         if(error){
             console.log(error);
@@ -54,7 +54,7 @@ Cliente.view=(result)=>{
 }
 
 Cliente.delete=(id,result)=>{
-    sql.query(`call ingreso_cliente(${id},"${null}","${null}","${null}","${null}","${null}",${null},${null},${null},"${null}","No Activo","delete" );`,
+    sql.query(`call ingreso_cliente(${id},"${null}","${null}","${null}","${null}","${null}","${null}","${null}","${null}","${null}","No Activo","delete" );`,
     (error, res)=>{
         if(error){
             result({message:"Failed",res:error}, null);

@@ -69,6 +69,7 @@ CuentaCliente.viewone=(id,result)=>{
     }
   )
 }
+
 CuentaCliente.delete = (id, result) => {
   sql.query(
     `call ingreso_cuenta_cliente(${id},${null},${null},"Activo","2022-09-09","delete");`,

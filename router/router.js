@@ -4,17 +4,23 @@ module.exports=app=>{
     const cliente=require("../controller/controller_cliente.js");
     const empleado=require("../controller/controller_empleado");
     const abono=require("../controller/controller_abono.js");
-    const cuentaCliente=require("../controller/controller_cuenta_cliente");
+    const cuenta=require("../controller/controller_cuenta_cliente");
     const tipoPago=require("../controller/controller_tipo_pago");
     const usuario=require("../controller/controller_usuario");
     const permiso =require("../controller/controller_permiso");
    // const tipoUsuario =require("../controller/controller_tipo_usuario");
     const modulo=require("../controller/controller_modulo");
+    const upload=require('../controller/controller_upload');
 
 
     app.get("/",(req,res)=>{
         res.json({message:"Bienvenido a dinerito ahora"})
     })
+    
+    //upload imagen
+    app.post('/img/upload',upload.create);
+    app.get("/img/delete/:name",upload.delete);
+    app.get("/img/view/:name",upload.view);
 
     //router Plan
     app.post("/plan",verifyToken,plan.create);
@@ -35,13 +41,14 @@ module.exports=app=>{
     app.post("/abono",verifyToken,abono.create);
     app.post("/abono/update",verifyToken,abono.update);
     app.get("/abono/view",verifyToken,abono.view);
+	app.get("/abono/viewxp/:id",verifyToken,abono.viewxp);
     app.get("/abono/delete/:id",verifyToken,abono.delete);
     //router cuenta_cliente
-    app.post("/cuentaCliente",verifyToken,cuentaCliente.create);
-    app.post("/cuentaCliente/update",verifyToken,cuentaCliente.update);
-    app.get("/cuentaCliente/view",verifyToken,cuentaCliente.view);
-    app.get("/cuentaCliente/viewone/:id",verifyToken,cuentaCliente.viewone);
-    app.get("/cuentaCliente/delete/:id",verifyToken,cuentaCliente.delete);
+    app.post("/cuenta",verifyToken,cuenta.create);
+    app.post("/cuenta/update",verifyToken,cuenta.update);
+    app.get("/cuenta/view",verifyToken,cuenta.view);
+    app.get("/cuenta/viewone/:id",verifyToken,cuenta.viewone);
+    app.get("/cuenta/delete/:id",verifyToken,cuenta.delete);
       //router tipo_pago
     app.post("/tipoPago",verifyToken,tipoPago.create);
     app.post("/tipoPago/update",verifyToken,tipoPago.update);

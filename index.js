@@ -1,5 +1,6 @@
 
 const express=require("express");
+const fileUpload =require('express-fileupload');
 const cors=require("cors");
 
 const app=express();
@@ -24,6 +25,9 @@ app.use((req,res,next)=>{
 
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
+
+app.use(fileUpload())
+app.use(express.static("files"));
 
 const router=require("./router/router");
 router(app);

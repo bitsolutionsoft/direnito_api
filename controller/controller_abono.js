@@ -45,6 +45,19 @@ exports.view=(req,res)=>{
         }
     });
 }
+exports.viewxp=(req,res)=>{
+    Abono.viewxp(req.params.id,(error,data)=>{
+        if(error){
+            if(error.kind === "not_found"){
+                res.status(404).send({message:"Failed",res:error.message});
+            }else{
+                res.status(500).send({message:"Failed",res:error.message});
+            }
+        }else{
+            res.send(data);
+        }
+    });
+}
 
 
 exports.delete=(req, res)=>{
