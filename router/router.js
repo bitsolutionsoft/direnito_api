@@ -11,16 +11,20 @@ module.exports=app=>{
    // const tipoUsuario =require("../controller/controller_tipo_usuario");
     const modulo=require("../controller/controller_modulo");
     const upload=require('../controller/controller_upload');
+    const informe=require('../controller/controller_informe');
 
 
     app.get("/",(req,res)=>{
         res.json({message:"Bienvenido a dinerito ahora"})
     })
     
+
     //upload imagen
     app.post('/img/upload',upload.create);
     app.get("/img/delete/:name",upload.delete);
-    app.get("/img/view/:name",upload.view);
+    app.get("/imgs/view/:name",upload.view);
+    //route informe
+    app.post('/informe',verifyToken,informe.getInforme);
 
     //router Plan
     app.post("/plan",verifyToken,plan.create);

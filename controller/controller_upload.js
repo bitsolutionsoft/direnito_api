@@ -4,7 +4,7 @@ exports.create=(req,res)=>{
     console.log(req)
     let igmFile=req.files.foo;
  
-    igmFile.mv(`./imgs/${igmFile.name}`,error=>{
+    igmFile.mv(`../controller/imgs/${igmFile.name}`,error=>{
         if(error){
             console.log(error)
             res.status(500).send({message: error})
@@ -30,9 +30,20 @@ exports.view=(req,res)=>{
    console.log(req.params);
     let name=req.params.name;
     const filename=__dirname+'/imgs/'+name;
+	console.log(filename)
     const existFile=fs.existsSync(filename);
+	
     if(existFile){
-       res.sendFile(filename)
+		
+       res.sendFile(filename);
+	   
+	  /* var file = fs.readFile(filename, 'binary');
+		res.setHeader('Content-Length', stat.size);
+		res.setHeader('Content-Type', 'audio/mpeg');
+		res.setHeader('Content-Disposition', 'attachment; filename=your_file_name');
+		res.write(file, 'binary');
+		res.end();*/
+	   
     }else{
        res.send({message:"Failed"})
     }
