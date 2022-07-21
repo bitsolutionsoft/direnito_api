@@ -25,6 +25,7 @@ module.exports=app=>{
     app.get("/imgs/view/:name",upload.view);
     //route informe
     app.post('/informe',verifyToken,informe.getInforme);
+    app.post('/balance',verifyToken,informe.getBalance);
 
     //router Plan
     app.post("/plan",verifyToken,plan.create);
