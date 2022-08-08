@@ -10,11 +10,12 @@ const Abono = function (abono) {
   this.comprobante=abono.comprobante;
   this.mora=abono.mora;
   this.estado=abono.estado;
+  this.prox_pago=abono.prox_pago;
 };
 
 Abono.create = (abono, result) => {
   sql.query(
-    `call ingreso_abono(${abono.idabono},${abono.idcuenta},${abono.idempleado},"${abono.concepto}",${abono.monto},${abono.tipo_pago},"${abono.comprobante}",${abono.mora},"${abono.estado}","new");`,
+    `call ingreso_abono(${abono.idabono},${abono.idcuenta},${abono.idempleado},"${abono.concepto}",${abono.monto},${abono.tipo_pago},"${abono.comprobante}",${abono.mora},"${abono.estado}","${abono.prox_pago}","new");`,
     (error, res) => {
       if (error) {
         console.log(error);
@@ -26,9 +27,24 @@ Abono.create = (abono, result) => {
     }
   );
 };
+Abono.create_prox=(abono, result)=>{
+  sql.query(
+    `call ingreso_abono(${abono.idabono},${abono.idcuenta},${abono.idempleado},"${abono.concepto}",${abono.monto},${abono.tipo_pago},"${abono.comprobante}",${abono.mora},"${abono.estado}","${abono.prox_pago}","prox");`,
+  (error,res)=>{
+    if(error){
+      console.log(error)
+      result({message: "Failed", res:error}, null)
+      return;
+    }else{
+      result(null, {message:"Success", res:res})
+    }
+  }
+  )
+}
+
 Abono.update = (abono, result) => {
   sql.query(
-    `call ingreso_abono(${abono.idabono},${abono.idcuenta},${abono.idempleado},"${abono.concepto}",${abono.monto},${abono.tipo_pago},"${abono.comprobante}",${abono.mora},"${abono.estado}","update");`,
+    `call ingreso_abono(${abono.idabono},${abono.idcuenta},${abono.idempleado},"${abono.concepto}",${abono.monto},${abono.tipo_pago},"${abono.comprobante}",${abono.mora},"${abono.estado}","${abono.prox_pago}","update");`,
     (error, res) => {
       if (error) {
         console.log(error);
@@ -42,7 +58,7 @@ Abono.update = (abono, result) => {
 };
 Abono.view = (result) => {
   sql.query(
-    `call ingreso_abono(${null},${null},${null},"${null}",${null},${null},"${null}",${null},"${null}","view");`,
+    `call ingreso_abono(${null},${null},${null},"${null}",${null},${null},"${null}",${null},"${null}","${null}","view");`,
     (error, res) => {
       if (error) {
 		  console.log(error);
@@ -60,7 +76,7 @@ Abono.view = (result) => {
 
 Abono.viewxp = (id, result) => {
   sql.query(
-  `call ingreso_abono(${null},${id},${null},"${null}",${null},${null},"${null}",${null},"${null}","viewxp");`,
+  `call ingreso_abono(${null},${id},${null},"${null}",${null},${null},"${null}",${null},"${null}","${null}","viewxp");`,
     (error, res) => {
       if (error) {
 		  console.log(error);
@@ -78,7 +94,7 @@ Abono.viewxp = (id, result) => {
 
 Abono.delete = (id, result) => {
   sql.query(
-    `call ingreso_abono(${id},${null},${null},"${null}",${null},${null},"${null}",${null},"${null}","delete");`,
+    `call ingreso_abono(${id},${null},${null},"${null}",${null},${null},"${null}",${null},"${null}","${null}","delete");`,
     (error, res) => {
       if (error) {
         console.log(error);

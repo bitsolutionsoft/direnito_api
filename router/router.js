@@ -44,6 +44,7 @@ module.exports=app=>{
     app.get("/empleado/delete/:id",verifyToken,empleado.delete);
     //rourter abono
     app.post("/abono",verifyToken,abono.create);
+    app.post("/abono/prox",verifyToken,abono.create_prox);
     app.post("/abono/update",verifyToken,abono.update);
     app.get("/abono/view",verifyToken,abono.view);
 	app.get("/abono/viewxp/:id",verifyToken,abono.viewxp);

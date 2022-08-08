@@ -13,6 +13,18 @@ Abono.create(new Abono(req.body),(error,data)=>{
 	}    
 });
 }
+exports.create_prox=(req, res)=>{
+    if(!req.body){
+        res.status(400).send({message:"Failed",res:"el contendio no puede se vacío"})
+    }
+    Abono.create_prox(new Abono(req.body),(error, data)=>{
+        if(error){
+            res.status(500).send({message:"Failed", res:error});
+        }else{
+            res.send(data)
+        }
+    })
+}
 
 exports.update=(req,res)=>{
     if(!req.body){
