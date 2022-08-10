@@ -58,7 +58,7 @@ Abono.update = (abono, result) => {
 };
 Abono.view = (result) => {
   sql.query(
-    `call ingreso_abono(${null},${null},${null},"${null}",${null},${null},"${null}",${null},"${null}","${null}","view");`,
+    `call ingreso_abono(${null},${null},${null},"${null}",${null},${null},"${null}",${null},"${null}","2022-12-12","view");`,
     (error, res) => {
       if (error) {
 		  console.log(error);
@@ -76,7 +76,7 @@ Abono.view = (result) => {
 
 Abono.viewxp = (id, result) => {
   sql.query(
-  `call ingreso_abono(${null},${id},${null},"${null}",${null},${null},"${null}",${null},"${null}","${null}","viewxp");`,
+  `call ingreso_abono(${null},${id},${null},"${null}",${null},${null},"${null}",${null},"${null}","2022-12-12","viewxc");`,
     (error, res) => {
       if (error) {
 		  console.log(error);
@@ -94,7 +94,7 @@ Abono.viewxp = (id, result) => {
 
 Abono.delete = (id, result) => {
   sql.query(
-    `call ingreso_abono(${id},${null},${null},"${null}",${null},${null},"${null}",${null},"${null}","${null}","delete");`,
+    `call ingreso_abono(${id},${null},${null},"${null}",${null},${null},"${null}",${null},"${null}","2022-12-12","delete");`,
     (error, res) => {
       if (error) {
         console.log(error);

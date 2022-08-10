@@ -5,14 +5,15 @@ const CuentaCliente = function (cuentaCliente) {
   this.idcliente = cuentaCliente.idcliente;
   this.idplan = cuentaCliente.idplan;
   this.estado = cuentaCliente.estado;
-  this.prox_pago = cuentaCliente.prox_pago;
+
 };
 
 CuentaCliente.create = (cuentaCliente, result) => {
   sql.query(
-    `call ingreso_cuenta_cliente(${cuentaCliente.idcuenta},${cuentaCliente.idcliente},${cuentaCliente.idplan},"${cuentaCliente.estado}","${cuentaCliente.prox_pago}","new");`,
+    `call ingreso_cuenta_cliente(${cuentaCliente.idcuenta},${cuentaCliente.idcliente},${cuentaCliente.idplan},"${cuentaCliente.estado}","new");`,
     (error, res) => {
       if (error) {
+        console.log(error)
         result({ message: "Failed", res: error }, null);
         return;
       } else {
@@ -23,7 +24,7 @@ CuentaCliente.create = (cuentaCliente, result) => {
 };
 CuentaCliente.update = (cuentaCliente, result) => {
   sql.query(
-    `call ingreso_cuenta_cliente(${cuentaCliente.idcuenta},${cuentaCliente.idcliente},${cuentaCliente.idplan},"${cuentaCliente.estado}","${cuentaCliente.prox_pago}","update");`,
+    `call ingreso_cuenta_cliente(${cuentaCliente.idcuenta},${cuentaCliente.idcliente},${cuentaCliente.idplan},"${cuentaCliente.estado}","update");`,
     (error, res) => {
       if (error) {
         console.log(error);
@@ -37,13 +38,15 @@ CuentaCliente.update = (cuentaCliente, result) => {
 };
 CuentaCliente.view = (result) => {
   sql.query(
-    `call ingreso_cuenta_cliente(${null},${null},${null},"Activo","2022-09-09","view");`,
+    `call ingreso_cuenta_cliente(${null},${null},${null},"Activo","view");`,
     (error, res) => {
       if (error) {
+        console.log(error)
         result({message:"Failed",res:error}, null);
         return;
       }
       if (res[0].length) {
+        console.log(res[0])
         result(null, { message: "Success", res: res[0] });
       } else {
         result({ error: "not_found",res:error }, null);
@@ -55,9 +58,10 @@ CuentaCliente.view = (result) => {
 
 CuentaCliente.viewone=(id,result)=>{
   sql.query(
-    `call ingreso_cuenta_cliente(${null},${id},${null},"Activo","2022-09-09","viewone");`,
+    `call ingreso_cuenta_cliente(${null},${id},${null},"Activo","viewone");`,
     (error,res)=>{
       if(error){
+        console.log(error)
         result({message:"Failed",res:error})
         return;
       }
@@ -72,7 +76,7 @@ CuentaCliente.viewone=(id,result)=>{
 
 CuentaCliente.delete = (id, result) => {
   sql.query(
-    `call ingreso_cuenta_cliente(${id},${null},${null},"Activo","2022-09-09","delete");`,
+    `call ingreso_cuenta_cliente(${id},${null},${null},"Activo","delete");`,
     (error, res) => {
       if (error) {
         console.log(error);

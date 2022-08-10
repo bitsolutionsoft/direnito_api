@@ -6,7 +6,7 @@ if(!req.body){
 }
 CuentaCliente.create(new CuentaCliente(req.body),(error,data)=>{
     if(error){ 
-		res.status(500).send({message:'Failed',res:error.res.message});
+		res.status(500).send({message:'Failed',res:error});
 	}
     else  {
 		res.send(data);
@@ -22,9 +22,9 @@ exports.update=(req,res)=>{
         if(error){
             console.log(error);
             if(error.kind==="not_found"){
-                res.status(404).send({message:"Failed",res:error.message});
+                res.status(404).send({message:"Failed",res:error});
             }else{
-                res.status(500).send({message:"Failed",res:error.message})
+                res.status(500).send({message:"Failed",res:error})
             }
         }else{
             res.send(data);
@@ -36,9 +36,9 @@ exports.view=(req,res)=>{
     CuentaCliente.view((error,data)=>{
         if(error){
             if(error.kind === "not_found"){
-                res.status(404).send({message:"Failed",res:error.message});
+                res.status(404).send({message:"Failed",res:error});
             }else{
-                res.status(500).send({message:"Failed",res:error.message});
+                res.status(500).send({message:"Failed",res:error});
             }
         }else{
             res.send(data);
@@ -66,9 +66,9 @@ exports.delete=(req, res)=>{
  CuentaCliente.delete(req.params.id,(error,data)=>{
     if(error){
         if(error.kind === "not_found"){
-            res.status(404).send({message:"Failed", res:error.res.message});
+            res.status(404).send({message:"Failed", res:error});
         }else{
-            res.status(500).send({message:"Failed", res:error.res.message});
+            res.status(500).send({message:"Failed", res:error});
         }
     }else{
         res.send(data)
