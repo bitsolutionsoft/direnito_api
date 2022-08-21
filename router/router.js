@@ -26,6 +26,7 @@ module.exports=app=>{
     //route informe
     app.post('/informe',verifyToken,informe.getInforme);
     app.post('/balance',verifyToken,informe.getBalance);
+    app.post('/ganancia',verifyToken,informe.getGanancia);
 
     //router Plan
     app.post("/plan",verifyToken,plan.create);
@@ -49,6 +50,8 @@ module.exports=app=>{
     app.get("/abono/view",verifyToken,abono.view);
 	app.get("/abono/viewxp/:id",verifyToken,abono.viewxp);
     app.get("/abono/delete/:id",verifyToken,abono.delete);
+    app.get("/abono/infocliente/:id",verifyToken,abono.viewinfocliente);
+    app.get("/abono/infovale/:id",verifyToken,abono.viewinfovale);
     //router cuenta_cliente
     app.post("/cuenta",verifyToken,cuenta.create);
     app.post("/cuenta/update",verifyToken,cuenta.update);

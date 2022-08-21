@@ -92,6 +92,42 @@ Abono.viewxp = (id, result) => {
   );
 };
 
+Abono.viewinfocliente = (id, result) => {
+  sql.query(
+  `call infocliente(${id});`,
+    (error, res) => {
+      if (error) {
+		  console.log(error);
+        result({message:"Failed",res:error}, null);
+        return;
+      }
+      if (res[0].length) {
+        result(null, { message: "Success", res: res[0] });
+      } else {
+        result({ error: "not_found",res:error }, null);
+      }
+    }
+  );
+};
+
+Abono.viewinfovale = (id, result) => {
+  sql.query(
+  `call infovale(${id});`,
+    (error, res) => {
+      if (error) {
+		  console.log(error);
+        result({message:"Failed",res:error}, null);
+        return;
+      }
+      if (res[0].length) {
+        result(null, { message: "Success", res: res[0] });
+      } else {
+        result({ error: "not_found",res:error }, null);
+      }
+    }
+  );
+};
+
 Abono.delete = (id, result) => {
   sql.query(
     `call ingreso_abono(${id},${null},${null},"${null}",${null},${null},"${null}",${null},"${null}","2022-12-12","delete");`,
