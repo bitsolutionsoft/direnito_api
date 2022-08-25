@@ -39,10 +39,28 @@ Usuario.view = (result) => {
     `call ingreso_usuario(${null},${null},"${null}","${null}","view");`,
     (error, res) => {
       if (error) {
+        console.log(error)
         result({message:"Failed",res:error}, null);
         return;
       }
       if (res[0].length) {
+        result(null, { message: "Success", res: res[0] });
+      } else {
+        result({ error: "not_found",res:error }, null);
+      }
+    }
+  );
+};
+Usuario.viewOne = (id,result) => {
+  sql.query(
+    `call ingreso_usuario(${null},${id},"${null}","${null}","viewone");`,
+    (error, res) => {
+      if (error) {
+        result({message:"Failed",res:error}, null);
+        return;
+      }
+      if (res[0].length) {
+        console.log(res[0])
         result(null, { message: "Success", res: res[0] });
       } else {
         result({ error: "not_found",res:error }, null);

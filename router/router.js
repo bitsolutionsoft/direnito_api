@@ -12,6 +12,7 @@ module.exports=app=>{
     const modulo=require("../controller/controller_modulo");
     const upload=require('../controller/controller_upload');
     const informe=require('../controller/controller_informe');
+    const ajuste=require("../controller/controller_ajuste");
 
 
     app.get("/",(req,res)=>{
@@ -27,7 +28,10 @@ module.exports=app=>{
     app.post('/informe',verifyToken,informe.getInforme);
     app.post('/balance',verifyToken,informe.getBalance);
     app.post('/ganancia',verifyToken,informe.getGanancia);
-
+    //route ajuste
+    app.post('/ajuste',verifyToken,ajuste.Create);
+    app.post('/ajuste/update',verifyToken,ajuste.Update);
+    app.get('/ajuste/view',verifyToken,ajuste.View)
     //router Plan
     app.post("/plan",verifyToken,plan.create);
     app.post("/plan/update",verifyToken, plan.update);
@@ -68,6 +72,7 @@ module.exports=app=>{
     app.post("/usuario/update",verifyToken,usuario.update);
     app.post("/usuario/login",usuario.findUser);
     app.get("/usuario/view",verifyToken,usuario.view);
+    app.get("/usuario/emp/:id",verifyToken,usuario.viewOne);
     app.get("/usuario/delete/:id",verifyToken,usuario.delete);
     //router permiso
     app.post("/permiso",verifyToken,permiso.create);

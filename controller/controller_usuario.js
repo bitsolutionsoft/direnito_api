@@ -47,6 +47,20 @@ exports.view=(req,res)=>{
     });
 }
 
+exports.viewOne=(req,res)=>{
+    Usuario.viewOne(req.params.id,(error,data)=>{
+        if(error){
+            if(error.kind === "not_found"){
+                res.status(404).send({message:"Failed",res:error});
+            }else{
+                res.status(500).send({message:"Failed",res:error});
+            }
+        }else{
+            res.send(data);
+        }
+    });
+}
+
 
 exports.delete=(req, res)=>{
  Usuario.delete(req.params.id,(error,data)=>{
