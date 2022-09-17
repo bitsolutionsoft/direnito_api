@@ -31,7 +31,7 @@ module.exports=app=>{
     //route ajuste
     app.post('/ajuste',verifyToken,ajuste.Create);
     app.post('/ajuste/update',verifyToken,ajuste.Update);
-    app.get('/ajuste/view',verifyToken,ajuste.View)
+    app.get('/ajuste/view',ajuste.View)
     //router Plan
     app.post("/plan",verifyToken,plan.create);
     app.post("/plan/update",verifyToken, plan.update);
